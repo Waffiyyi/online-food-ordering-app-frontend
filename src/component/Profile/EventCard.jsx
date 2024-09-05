@@ -2,32 +2,31 @@ import React from 'react';
 import {Card, CardActions, CardContent, CardMedia, IconButton, Typography} from "@mui/material";
 import DeleteIcon from '@mui/icons-material/Delete';
 
-const EventCard = () => {
+const EventCard = ({image, isAdmin, eventName, location, startDateTime, endDateTime, restaurantName, handleDelete}) => {
     return (
         <div>
             <Card sx={{width:345}}>
                 <CardMedia
                     sx={{height:345}}
-                    image={'https://images.pexels.com/photos/784633/pexels-photo-784633.jpeg?auto=compress&cs=tinysrgb&w=800'}>
+                    image={image}>
                 </CardMedia>
                 <CardContent>
-                    <Typography variant={'h5'}>
-                        Indian Fast Food
+                    <Typography style={{marginBottom:"5px"}} variant={'h5'}>
+                        {restaurantName}
                     </Typography>
-                    <Typography variant={'body2'}>
-                        We cooking!
-                      50% off your first order tommorrow at Itamaga, pull in!!
+                    <Typography style={{fontWeight:"600"}}  variant={'body2'} >
+                        {eventName}
                     </Typography>
                     <div className={'py-2 space-y-2'}>
-                        <p>Itamaga</p>
-                        <p className={'text-sm text-blue-500'}>Novembar 14, 2024 12:00PM</p>
-                        <p className={'text-sm text-red-500'}>Novembar 15, 2024 12:00PM</p>
+                        <p>{location}</p>
+                        <p className={'text-sm text-blue-500'}>{startDateTime}</p>
+                        <p className={'text-sm text-red-500'}>{endDateTime}</p>
 
                     </div>
                 </CardContent>
-                {false && <CardActions>
-                    <IconButton>
-                        <DeleteIcon/>
+                {isAdmin && <CardActions>
+                    <IconButton className={'cursor-pointer'} onClick={handleDelete}>
+                        <DeleteIcon sx={{color:"red"}}/>
                     </IconButton>
                 </CardActions>}
             </Card>

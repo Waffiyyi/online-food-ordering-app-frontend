@@ -86,7 +86,7 @@ const OrderTable = () => {
                     <AvatarGroup >
                       {item.items.map((orderItem) =>
                         <Avatar
-                          key={orderItem.food.id}
+                          key={orderItem.food?.id}
                           src={orderItem.food?.images[0]}
                         />,
                       )}

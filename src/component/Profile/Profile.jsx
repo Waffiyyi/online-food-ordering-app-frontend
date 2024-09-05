@@ -6,16 +6,17 @@ import Orders from "./Orders.jsx";
 import Address from "./Address.jsx";
 import Favorites from "./Favorites.jsx";
 import Event from "./Event.jsx";
+import {useMediaQuery} from "@mui/material";
 
 
 const Profile = () => {
-    const  [openSideBar, setOpenSideBar] = useState(false);
+    const isSmallScreen = useMediaQuery('(max-width:1023px)');
     return (
-        <div className={'lg:flex justify-between'}>
-            <div className={'sticky h-[80vh] lg:w-[20%]'}>
-                <ProfileNavigation open={openSideBar}/>
+        <div className={'lg:flex justify-between '}>
+            <div className={'mb-10'}>
+                <ProfileNavigation/>
             </div>
-            <div className={'lg:w-[80%]'}>
+            <div style={{ marginTop: isSmallScreen ? '60px' : '0px' }} className={'lg:w-[80%]'}>
                 <Routes>
                     <Route path={'/'} element={<UserProfile/>}/>
                     <Route path={'/orders'} element={<Orders/>}/>

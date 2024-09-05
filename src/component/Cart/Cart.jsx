@@ -55,10 +55,7 @@ const Cart = () => {
                 }
             }
         }
-        dispatch(createOrder(data))
-        console.log("helpppp", cart.cartItems[0].food?.restaurant.id)
-
-        console.log("vakkeuueueueue",value)
+        dispatch(createOrder(data));
     }
     return (
         <>

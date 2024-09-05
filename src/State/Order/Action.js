@@ -36,9 +36,7 @@ export const getUsersOrder = (jwt) => {
                     Authorization: `Bearer ${jwt}`
                 },
             });
-            // if(data.payment_url) {
-            //     window.location.href = data.payment_url;
-            // }
+
             console.log("user order data", data)
             dispatch({type: GET_USER_ORDER_SUCCESS, payload: data})
         } catch (error) {
