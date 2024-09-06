@@ -4,6 +4,8 @@ const initialState = {
     ingredients: [],
     update: null,
     category: [],
+    error: null,
+    loading: false
 };
 
 const ingredientReducer = (state = initialState, action) =>{
@@ -36,6 +38,18 @@ const ingredientReducer = (state = initialState, action) =>{
                 update: action.payload,
                 ingredients: state.ingredients.map((item)=>
                     item.id === action.payload.id ? action.payload : item),
+            };
+
+        case actionType.GET_INGREDIENTS_FAILURE:
+        case actionType.CREATE_INGREDIENT_FAILURE:
+        case actionType.CREATE_INGREDIENT_CATEGORY_FAILURE:
+        case actionType.GET_INGREDIENT_CATEGORY_FAILURE:
+        case actionType.UPDATE_STOCK_FAILURE:
+
+            return {
+                ...state,
+                loading: false,
+                error: action.payload,
             };
 
         default:

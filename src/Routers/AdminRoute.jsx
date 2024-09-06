@@ -4,15 +4,15 @@ import CreateRestaurantForm
   from "../adminComponent/createRestaurantForm/CreateRestaurantForm.jsx";
 import Admin from "../adminComponent/Admin/Admin.jsx";
 import {useSelector} from "react-redux";
+import ErrorComponent from "../GlobalErrorComponent/ErrorComponent.jsx";
 
 const AdminRoute = () => {
-  const { restaurant, loading } = useSelector((store) => store);
+  const { restaurant, error } = useSelector((store) => store);
 
-  if (loading) {
-    return <div>Loading...</div>; // Display a loading indicator
-  }
+
   return (
     <div>
+      {error.error && <ErrorComponent message={error.error}/>}
       <Routes>
         <Route
           path={'/*'}

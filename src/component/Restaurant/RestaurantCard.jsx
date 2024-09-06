@@ -12,7 +12,7 @@ const RestaurantCard = ({item}) => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const jwt = localStorage.getItem("jwt");
-    const {auth} = useSelector(store => store)
+    const {auth, restaurant} = useSelector(store => store)
     const handleAddToFavorite= ()=>{
         dispatch(addToFavorite( jwt, item.id))
     }
@@ -26,7 +26,7 @@ const RestaurantCard = ({item}) => {
 
     return (
         <Card className={'w-[18rem]'}>
-            <div className={`${true ? 'cursor-pointer': 'cursor-not-allowed'} relative`}>
+            <div onClick={handleNavigateToRestaurant}  className={`${auth.user?.role==="ROLE_CUSTOMER" && item.open? 'cursor-pointer': 'cursor-not-allowed'} relative`}>
                 <img className={'w-full h-[10rem] rounded-t -md object-cover'}
                     src={item.images[0]} alt={""}/>
                 <Chip
@@ -44,9 +44,13 @@ const RestaurantCard = ({item}) => {
                     </p>
                 </div>
                 <div>
-                    <IconButton onClick={handleAddToFavorite}>
-                        {isPresentInFavorites(auth.favorites, item)? <FavoriteIcon/>: <FavoriteBorderIcon/>}
-                    </IconButton>
+                    { auth.user?.role==="ROLE_CUSTOMER" &&
+                      <IconButton onClick={handleAddToFavorite}>
+                        {isPresentInFavorites(auth.favorites, item) ?
+                          <FavoriteIcon /> : <FavoriteBorderIcon />}
+                    </IconButton >
+
+                    }
                 </div>
             </div>
         </Card>

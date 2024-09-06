@@ -6,6 +6,8 @@ import {
     UPDATE_ORDER_STATUS_REQUEST,
     UPDATE_ORDER_STATUS_SUCCESS
 } from "./ActionType.js";
+import {handleError} from "../Error/Reducer.js";
+import {CREATE_ORDER_FAILURE} from "../Order/ActionType.js";
 
 export const updateOrderStatus = ({orderId, orderStatus, jwt}) => {
     return async (dispatch) => {
@@ -19,17 +21,17 @@ export const updateOrderStatus = ({orderId, orderStatus, jwt}) => {
             console.log("update order status", response.data)
             dispatch({type: UPDATE_ORDER_STATUS_SUCCESS, payload: response.data})
         } catch (error) {
-            console.log("", error)
-            dispatch({type: UPDATE_ORDER_STATUS_FAILURE, payload: error})
+            console.log("update order status", error)
+            dispatch(handleError(UPDATE_ORDER_STATUS_FAILURE, error.response.data.errorMessage ||error.response?.data?.message || error.message));
         }
     }
 }
 
-export const fetchRestaurantOrder = ({restaurantId, orderStatus, jwt}) => {
+export const fetchRestaurantOrder = ({restaurantId, jwt}) => {
     return async (dispatch) => {
         dispatch({type: GET_RESTAURANT_ORDER_REQUEST});
         try {
-            const {data} = await api.get(`api/admin/order/restaurant/get-history?restaurantId=${restaurantId}&orderStatus=${orderStatus}`, {
+            const {data} = await api.get(`api/admin/order/restaurant/get-history-from-status?restaurantId=${restaurantId}`, {
                 headers: {
                     Authorization: `Bearer ${jwt}`
                 },
@@ -37,8 +39,26 @@ export const fetchRestaurantOrder = ({restaurantId, orderStatus, jwt}) => {
             console.log("restaurant order", data)
             dispatch({type: GET_RESTAURANT_ORDER_SUCCESS, payload: data})
         } catch (error) {
-            console.log("", error)
-            dispatch({type: GET_RESTAURANT_ORDER_FAILURE, payload: error})
+            console.log("fetch estaurant order", error)
+            dispatch(handleError(GET_RESTAURANT_ORDER_FAILURE, error.response.data.errorMessage ||error.response?.data?.message || error.message));
         }
     }
 }
+
+// export const fetchRestaurantOrder = ({restaurantId, orderStatus, jwt}) => {
+//     return async (dispatch) => {
+//         dispatch({type: GET_RESTAURANT_ORDER_REQUEST});
+//         try {
+//             const {data} = await api.get(`api/admin/order/restaurant/get-history-from-status?restaurantId=${restaurantId}&orderStatus=${orderStatus}`, {
+//                 headers: {
+//                     Authorization: `Bearer ${jwt}`
+//                 },
+//             });
+//             console.log("restaurant order", data)
+//             dispatch({type: GET_RESTAURANT_ORDER_SUCCESS, payload: data})
+//         } catch (error) {
+//             console.log("fetch estaurant order", error)
+//             dispatch(handleError(GET_RESTAURANT_ORDER_FAILURE, error.response.data.errorMessage ||error.response?.data?.message || error.message));
+//         }
+//     }
+// }

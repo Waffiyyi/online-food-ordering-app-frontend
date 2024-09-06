@@ -137,7 +137,7 @@ const OrderTable = () => {
                         }}
                       >
                         {orderStatus.map((status) => <MenuItem
-                          key={status.value}
+                          key={status.label}
                           onClick={()=>handleUpdateOrder(item.id, status.value)}
                         >{status.label}</MenuItem >)}
                       </Menu >

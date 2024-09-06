@@ -9,6 +9,8 @@ import {
 } from "./ActionType.js";
 import axios from "axios";
 import {api, API_URL} from "../../Config/api.js";
+import {handleError} from "../Error/Reducer.js";
+import {getAllRestaurantAction} from "../Restaurant/Action.js";
 
 export const registerUser=(reqData)=> async (dispatch)=>{
     dispatch({type:REGISTER_REQUEST})
@@ -23,7 +25,7 @@ export const registerUser=(reqData)=> async (dispatch)=>{
         dispatch({type:REGISTER_SUCCESS, payload:data.jwt})
         console.log("register success", data)
     } catch (error){
-        dispatch({type:REGISTER_FAILURE, payload:error})
+        dispatch(handleError(REGISTER_FAILURE, error.response.data.errorMessage ||error.response?.data?.message || error.message));
         console.log("error", error)
     }
 }
@@ -39,10 +41,11 @@ export const loginUser=(reqData)=> async (dispatch)=>{
             reqData.navigate("/")
         }
         dispatch({type:LOGIN_SUCCESS, payload:data.jwt})
+        dispatch(getAllRestaurantAction(data.jwt))
         console.log("login success", data)
     } catch (error){
-        dispatch({type:LOGIN_FAILURE, payload:error})
-        console.log("error", error)
+        console.log("error in dispatch", error)
+        dispatch(handleError(LOGIN_FAILURE, error.response.data.errorMessage ||error.response?.data?.message || error.message));
     }
 }
 
@@ -57,7 +60,7 @@ export const getUser=(jwt)=> async (dispatch)=>{
         dispatch({type:GET_USER_SUCCESS, payload:data})
         console.log("user profile", data)
     } catch (error){
-        dispatch({type:GET_USER_FAILURE, payload:error})
+        dispatch(handleError(GET_USER_FAILURE, error.response.data.errorMessage));
         console.log("error", error)
     }
 }
@@ -73,7 +76,7 @@ export const addToFavorite=(jwt, restaurantId)=> async (dispatch)=>{
         dispatch({type:ADD_TO_FAVORITE_SUCCESS, payload:data})
         console.log("added to favorite", data)
     } catch (error){
-        dispatch({type:ADD_TO_FAVORITE_FAILURE, payload:error})
+        dispatch(handleError(ADD_TO_FAVORITE_FAILURE, error.response.data.errorMessage ||error.response?.data?.message || error.message));
         console.log("error", error)
     }
 

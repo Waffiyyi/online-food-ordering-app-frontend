@@ -9,12 +9,9 @@ import {
     TableHead, TableRow, Typography,
 } from "@mui/material";
 import CreateIcon from '@mui/icons-material/Create'
-import {Delete} from "@mui/icons-material";
 import CreateFoodCategoryForm from "./CreateFoodCategoryForm.jsx";
 import {useDispatch, useSelector} from "react-redux";
 import {getRestaurantCategory} from "../../State/Restaurant/Action.js";
-import {fetchRestaurantOrder} from "../../State/RestaurantOrder/Action.js";
-const orders=[1,1,1,1,1,1]
 const style = {
     position: 'absolute',
     top: '50%',
@@ -40,6 +37,7 @@ const FoodCategoryTable = () => {
     const handleClose = () => {
         setOpen(false);
     };
+    console.log("is this the bug ", restaurant.usersRestaurant?.id)
     useEffect(() => {
         dispatch(getRestaurantCategory({
             jwt: jwt,

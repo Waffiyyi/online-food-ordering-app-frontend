@@ -33,11 +33,14 @@ const RestaurantDetails = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const jwt = localStorage.getItem("jwt");
-    const {auth, restaurant, menu} = useSelector(store => store);
+    const {restaurant, menu} = useSelector(store => store);
     const [selectedCategory, setSelectedCategory] = useState("");
+
+    console.log("restaurant in details", restaurant)
 
 
     const {id} = useParams();
+    console.log("id in details",id)
     const handleFilter = (e, value) => {
       setFoodType(value)
     }
@@ -50,7 +53,7 @@ const RestaurantDetails = () => {
 
     useEffect(() => {
         dispatch(getRestaurantById({jwt, restaurantId: id}))
-        dispatch(getRestaurantCategory({restaurantId: id, jwt}))
+        dispatch(getRestaurantCategory({restaurantId: id, jwt:jwt}))
     }, []);
 
 
@@ -68,8 +71,8 @@ const RestaurantDetails = () => {
     return (
         <div className={'px-5 lg:px-20'}>
             <section>
-                <h3 className={'text-gray-500 py-2 mt-10'}> Home/india/indian fast food/3</h3>
-                <div>
+                {/*<h3 className={'text-gray-500 py-2 mt-10'}></h3>*/}
+                <div className={'mt-5'}>
                     <Grid container spacing={2}>
                         <Grid item xs={12}>
                             <img className={"w-full h-[40vh] object-cover"}

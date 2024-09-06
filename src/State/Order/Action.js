@@ -5,6 +5,8 @@ import {
     CREATE_ORDER_SUCCESS, GET_USER_ORDER_FAILURE,
     GET_USER_ORDER_REQUEST, GET_USER_ORDER_SUCCESS
 } from "./ActionType.js";
+import {handleError} from "../Error/Reducer.js";
+import {CREATE_MENU_ITEM_FAILURE} from "../Menu/ActionType.js";
 
 export const createOrder = (reqData) => {
     return async (dispatch) => {
@@ -22,7 +24,7 @@ export const createOrder = (reqData) => {
             dispatch({type: CREATE_ORDER_SUCCESS, payload: data})
         } catch (error) {
             console.log("", error)
-            dispatch({type: CREATE_ORDER_FAILURE, payload: error})
+            dispatch(handleError(CREATE_ORDER_FAILURE, error.response.data.errorMessage ||error.response?.data?.message || error.message));
         }
     }
 }
@@ -41,7 +43,7 @@ export const getUsersOrder = (jwt) => {
             dispatch({type: GET_USER_ORDER_SUCCESS, payload: data})
         } catch (error) {
             console.log("", error)
-            dispatch({type: GET_USER_ORDER_FAILURE, payload: error})
+            dispatch(handleError(GET_USER_ORDER_FAILURE, error.response.data.errorMessage ||error.response?.data?.message || error.message));
         }
     }
 }

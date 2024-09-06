@@ -110,6 +110,10 @@ const restaurantReducer = (state = initialState, action) => {
         case actionTypes.CREATE_CATEGORY_FAILURE:
         case actionTypes.GET_RESTAURANT_CATEGORY_FAILURE:
         case actionTypes.UPDATE_RESTAURANT_STATUS_FAILURE:
+        case actionTypes.CREATE_EVENT_FAILURE:
+        case actionTypes.GET_ALL_EVENT_FAILURE:
+        case actionTypes.GET_RESTAURANT_EVENT_FAILURE:
+        case actionTypes.DELETE_EVENT_FAILURE:
             return {
                 ...state,
                 loading: false,

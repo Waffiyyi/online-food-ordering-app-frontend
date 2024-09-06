@@ -11,13 +11,12 @@ const Home = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate();
     const jwt = localStorage.getItem("jwt")
-    const {restaurant} = useSelector(store=> store)
-    console.log("restaurant", restaurant)
-    useEffect(()=>{
-        dispatch(getAllRestaurantAction(jwt))
+    const {restaurant, auth} = useSelector(store=> store)
 
+    useEffect(()=>{
+        if(auth.jwt || jwt)
+            dispatch(getAllRestaurantAction(jwt))
     }, [])
-    console.log("restaurants", restaurant.restaurants)
 
 
     return (
@@ -39,7 +38,7 @@ const Home = () => {
                 <MultiItemCarousel/>
             </section>
             <section className={'px-5 lg:px-20 pt-10'}>
-                <h1 className={'text-2xl font-semibold text-gray-400 pb-8'}> Order From Our Handpicked Favourites </h1>
+                <h1 className={'text-2xl font-semibold text-gray-400 pb-8'}> Login To Order From Top Tier Restaurants </h1>
                 <div className={'flex flex-wrap items-center justify-around gap-5'}>
                     {
                         restaurant.restaurants.map((item)=><RestaurantCard key={item.id} item={item}/>)

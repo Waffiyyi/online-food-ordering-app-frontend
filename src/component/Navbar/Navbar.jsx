@@ -7,7 +7,6 @@ import './Navbar.css'
 import {useNavigate} from "react-router-dom";
 import {Person} from "@mui/icons-material";
 import {useDispatch, useSelector} from "react-redux";
-import {findCart} from "../../State/Cart/Action.js";
 
 const Navbar = () => {
     const {auth, cart} = useSelector(store => store);
@@ -15,11 +14,11 @@ const Navbar = () => {
 
 
     const handleAvaterClick = () => {
-        // if(auth.user?.role==="ROLE_CUSTOMER"){
-        //     navigate("/my-profile")
-        // }else{
-        navigate("/my-profile")
-        // }
+        if(auth.user?.role==="ROLE_CUSTOMER"){
+            navigate("/my-profile")
+        }else{
+        navigate("/admin/restaurant/")
+        }
     }
     return (
         <Box className={'px-5 sticky top-0 z-50 py-[.8rem] bg-[#e91e63] lg:px-20 flex justify-between'}

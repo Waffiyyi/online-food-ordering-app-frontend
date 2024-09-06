@@ -81,14 +81,14 @@ const CreateRestaurantForm = () => {
     formik.setFieldValue("images", updatedImages)
   }
   return (
-    <div className={'py-1o lg:flex items-center justify-center min-h-screen'}>
+    <div className={'py-10 lg:flex items-center justify-center min-h-screen'}>
       <div className={'lg: max-w-4xl'}>
         <h1 className={'font-bold text-2xl text-center py-2'}>
           Add New Restaurant
         </h1 >
         <form
           onSubmit={formik.handleSubmit}
-          className={'space-y-4'}
+          className={'space-y-4 px-5'}
         >
           <Grid
             container
