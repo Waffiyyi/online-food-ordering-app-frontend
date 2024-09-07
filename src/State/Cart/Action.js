@@ -77,7 +77,7 @@ export const addItemToCart = (reqData) => {
       const actionType = isNewItem ? ADD_ITEM_TO_CART_SUCCESS : UPDATE_CART_ITEM_SUCCESS;
 
       dispatch({type: actionType, payload: data});
-
+      dispatch(findCart(reqData.jwt))
       return {isNewItem: isNewItem};
     } catch (error) {
 
@@ -97,6 +97,7 @@ export const updateCartItem = (reqData) => {
       });
       console.log("update cart items", data)
       dispatch({type: UPDATE_CART_ITEM_SUCCESS, payload: data})
+      dispatch(findCart(reqData.jwt))
     } catch (error) {
       console.log("error", error)
       dispatch(handleError(UPDATE_CART_ITEM_FAILURE, error.response.data.errorMessage ||error.response?.data?.message || error.message));

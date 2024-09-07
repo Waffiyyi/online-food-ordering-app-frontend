@@ -11,9 +11,7 @@ import {getRestaurantByUserId} from "./State/Restaurant/Action.js";
 function App() {
   const dispatch = useDispatch();
   const jwt = localStorage.getItem("jwt")
-  const {auth} = useSelector(store => store);
-  console.log("auth", auth)
-
+  const {auth, restaurant} = useSelector(store => store);
 
   useEffect(() => {
     if (jwt || auth.jwt) {
@@ -23,7 +21,7 @@ function App() {
   }, [auth.jwt]);
 
   useEffect(() => {
-    if(auth.user?.role==="ROLE_RESTAURANT_OWNER")
+    if(auth.user?.role==="ROLE_RESTAURANT_OWNER" && !restaurant.usersRestaurant)
       dispatch(getRestaurantByUserId(auth.jwt || jwt));
   }, [auth.user]);
   return (

@@ -10,8 +10,8 @@ const PaymentFailed = () => {
     return (
         <div className={'min-h-screen px-5'}>
             <div className={'flex flex-col items-center justify-center' +
-                ' h-[90vh]'}>
-                <Card className={'box w-full lg:w-1/4 flex flex-col' +
+                ' h-[80vh]'}>
+                <Card className={'box w-50% lg:w-1/4 flex flex-col' +
                     ' items-center rounded-md p-5'}>
                     <RemoveShoppingCartIcon sx={{fontSize: "3rem", marginBottom: "1rem",color: red[500]}}/>
                     <h1>Order canceled :(</h1>

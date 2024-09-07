@@ -36,9 +36,9 @@ const Navbar = () => {
 
             <div className={'flex items-center space-x-2 lg:space-x-10'}>
                 <div className={''}>
-                    <IconButton>
+                    { auth.user && <IconButton >
                         <SearchIcon sx={{fontSize: "1.5rem"}}/>
-                    </IconButton>
+                    </IconButton >}
                 </div>
                 <div className={'cursor-pointer'}>
                     {auth.user ? <Avatar onClick={handleAvaterClick} sx={{
@@ -50,13 +50,15 @@ const Navbar = () => {
                         </IconButton>}
                 </div>
                 <div className={''}>
-                    <IconButton onClick={() => navigate("/cart")}>
-                        <Badge color="primary"
-                               badgeContent={cart.cart?.items.length}>
+                    { auth.user && <IconButton onClick={() => navigate("/cart")}>
+                        <Badge
+                          color='primary'
+                          badgeContent={cart.cart?.items.length}
+                        >
                             <ShoppingCartIcon sx={{fontSize: "1.5rem"}}/>
-                        </Badge>
+                        </Badge >
 
-                    </IconButton>
+                    </IconButton >}
                 </div>
 
             </div>

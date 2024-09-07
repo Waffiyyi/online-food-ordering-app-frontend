@@ -10,6 +10,8 @@ import PaymentSuccess from "../component/Payment/PaymentSuccess.jsx";
 import PaymentFailed from "../component/Payment/PaymentFailed.jsx";
 import ErrorComponent from "../GlobalErrorComponent/ErrorComponent.jsx";
 import {useSelector} from "react-redux";
+import PrivateRoute from "../RouteGuards/PrivateRoute.jsx";
+import {CustomerPrivateRoute} from "../RouteGuards/CustomerPrivateRoute.jsx";
 
 const CustomerRoutes = () => {
   const {error} = useSelector((store) => store);
@@ -20,14 +22,17 @@ const CustomerRoutes = () => {
       <Routes >
         <Route path={'/'} element={<Home />}/>
         <Route path={'/account/:register'} element={<Home />}/>
+        <Route element={<CustomerPrivateRoute/>} >
         <Route
           path={'/restaurant/:city/:title/:id'}
           element={<RestaurantDetails />}
         />
+
         <Route path={'/cart'} element={<Cart />}/>
         <Route path={'/my-profile/*'} element={<Profile />}/>
         <Route path={'/payment/success/:id'} element={<PaymentSuccess />}/>
         <Route path={'/payment/fail'} element={<PaymentFailed />}/>
+        </Route>
       </Routes >
       <Auth />
     </div >

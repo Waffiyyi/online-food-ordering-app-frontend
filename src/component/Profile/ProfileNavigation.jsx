@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {Fragment, useState} from 'react';
 import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import HomeIcon from '@mui/icons-material/Home';
@@ -89,7 +89,7 @@ const ProfileNavigation = () => {
             ' justify-center text-xl gap-8 pt-16'}
         >
           {menu.map((item, i) =>
-            <>
+            <Fragment key={i}>
               <div
                 onClick={() => handleNavigate(item)}
                 className={'px-5 flex items-center space-x-5 cursor-pointer'}
@@ -98,7 +98,7 @@ const ProfileNavigation = () => {
                 <span >{item.title}</span >
               </div >
               {i !== menu.length - 1 && <Divider />}
-            </>,
+            </Fragment>,
           )}
 
         </div >

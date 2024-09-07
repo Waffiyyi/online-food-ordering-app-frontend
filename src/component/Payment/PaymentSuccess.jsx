@@ -9,8 +9,8 @@ const PaymentSuccess = () => {
     return (
         <div className={'min-h-screen px-5'}>
             <div className={'flex flex-col items-center justify-center' +
-                ' h-[90vh]'}>
-                <Card className={'box w-full lg:w-1/4 flex flex-col' +
+                ' h-[80vh]'}>
+                <Card className={'box w-50% lg:w-1/4 flex flex-col' +
                     ' items-center rounded-md p-5'}>
                     <TaskAltIcon sx={{fontSize: "5rem", color: green[500]}}/>
                     <h1>Order Success!</h1>

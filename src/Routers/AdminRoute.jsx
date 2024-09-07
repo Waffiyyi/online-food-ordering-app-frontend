@@ -5,6 +5,8 @@ import CreateRestaurantForm
 import Admin from "../adminComponent/Admin/Admin.jsx";
 import {useSelector} from "react-redux";
 import ErrorComponent from "../GlobalErrorComponent/ErrorComponent.jsx";
+import PrivateRoute from "../RouteGuards/PrivateRoute.jsx";
+import {AdminPrivateRoute} from "../RouteGuards/AdminPrivateRoute.jsx";
 
 const AdminRoute = () => {
   const { restaurant, error } = useSelector((store) => store);
@@ -14,10 +16,12 @@ const AdminRoute = () => {
     <div>
       {error.error && <ErrorComponent message={error.error}/>}
       <Routes>
+        <Route element={<AdminPrivateRoute/>} >
         <Route
           path={'/*'}
-          element={!restaurant.usersRestaurant ? <CreateRestaurantForm /> : <Admin />}
+          element={!restaurant.usersRestaurant ? <CreateRestaurantForm type={"Create"} /> : <Admin />}
         />
+        </Route>
       </Routes>
     </div>
   );

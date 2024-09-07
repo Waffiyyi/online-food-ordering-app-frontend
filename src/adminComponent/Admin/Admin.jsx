@@ -19,6 +19,8 @@ import {getUsersOrder} from "../../State/Order/Action.js";
 import {fetchRestaurantOrder} from "../../State/RestaurantOrder/Action.js";
 import AdminEvent from "../Events/AdminEvent.jsx";
 import {useMediaQuery} from "@mui/material";
+import CreateRestaurantForm
+  from "../createRestaurantForm/CreateRestaurantForm.jsx";
 
 const Admin = () => {
   const {restaurant, loading} = useSelector(store => store);
@@ -36,6 +38,7 @@ const Admin = () => {
       jwt: jwt,
       orderStatus: ""}))
   }, [])
+
   return (
     <div className={'lg:flex justify-between'}>
       <div >
@@ -51,6 +54,7 @@ const Admin = () => {
           <Route path={'/event'} element={<AdminEvent />}/>
           <Route path={'/details'} element={<RestaurantDetails />}/>
           <Route path={'/add-menu'} element={<CreateMenuForm />}/>
+          <Route path={'/update-restaurant'} element={<CreateRestaurantForm type={"Update"} />}/>
         </Routes >
 
 

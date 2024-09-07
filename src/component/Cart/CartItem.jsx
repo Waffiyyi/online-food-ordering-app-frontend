@@ -4,7 +4,11 @@ import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import {useDispatch, useSelector} from "react-redux";
 import {useNavigate} from "react-router-dom";
-import {removeCartItem, updateCartItem} from "../../State/Cart/Action.js";
+import {
+    findCart,
+    removeCartItem,
+    updateCartItem,
+} from "../../State/Cart/Action.js";
 
 const CartItem = ({item}) => {
     const {auth, cart} = useSelector((store) => store)
@@ -18,11 +22,11 @@ const CartItem = ({item}) => {
         }
         const data = {cartItemId: item.id, quantity: item.quantity+value}
         dispatch(updateCartItem({data, jwt}));
+
     }
 
     const handleRemoveCartItem=()=> {
         dispatch(removeCartItem({cartItemId:item.id, jwt: auth.jwt || jwt}))
-
     }
     return (
         <div className={'px-5'}>

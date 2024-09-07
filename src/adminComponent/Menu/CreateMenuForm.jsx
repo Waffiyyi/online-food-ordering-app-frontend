@@ -14,6 +14,7 @@ import {uploadImageToCloudinary} from "../util/UploadToCloudinary.js";
 import {useDispatch, useSelector} from "react-redux";
 import {createMenuItem} from "../../State/Menu/Action.js";
 import {getIngredientsOfRestaurant} from "../../State/Ingredients/Action.js";
+import {useNavigate} from "react-router-dom";
 
 const initialValues = {
   name: "",
@@ -33,12 +34,13 @@ const CreateMenuForm = () => {
   const jwt = localStorage.getItem("jwt")
   const dispatch = useDispatch();
   const [uploadImage, setUploadImage] = useState(false);
+  const navigate = useNavigate();
   const formik = useFormik({
       initialValues,
       onSubmit: (values) => {
         values.restaurantId = restaurant.usersRestaurant.id
         dispatch(createMenuItem({menu: values, jwt}))
-        console.log("data", values)
+        navigate("/admin/restaurant/menu")
       },
     },
   );
@@ -111,7 +113,7 @@ const CreateMenuForm = () => {
               </label >
               <div className={'flex flex-wrap gap-2'}>
                 {formik.values.images.map((image, index) =>
-                  <div key={index} className={'relative'}>
+                  <div key={image} className={'relative'}>
                     <img
                       className={'w-24 h-24 object-cover'}
                       src={image}

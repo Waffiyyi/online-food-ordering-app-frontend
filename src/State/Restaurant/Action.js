@@ -15,6 +15,7 @@ import {
   UPDATE_RESTAURANT_STATUS_REQUEST, UPDATE_RESTAURANT_STATUS_SUCCESS, UPDATE_RESTAURANT_STATUS_FAILURE,
 } from "./ActionType.js";
 import { handleError } from "../Error/Reducer.js";
+import {data} from "autoprefixer";
 
 export const getAllRestaurantAction = (token) => async (dispatch) => {
   dispatch({ type: GET_ALL_RESTAURANT_REQUEST });
@@ -87,6 +88,7 @@ export const updateRestaurant = ({ restaurantId, restaurantData, jwt }) => async
       },
     });
     dispatch({ type: UPDATE_RESTAURANT_SUCCESS, payload: res.data });
+    console.log("update restaurant", res.data)
   } catch (error) {
     dispatch(handleError(UPDATE_RESTAURANT_FAILURE, error.response.data.errorMessage ||error.response?.data?.message || error.message));
   }

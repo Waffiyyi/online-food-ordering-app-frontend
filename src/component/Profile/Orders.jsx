@@ -27,7 +27,9 @@ const Orders = () => {
                         ))
                     )
                 ) : (
-                    <p>No orders found.</p>
+                  <div className={'w-full space-y-5'}>
+                    <p className={'text-center text-gray-400'}>You have not placed any orders yet.</p >
+                  </div>
                 )}
             </div>
         </div>

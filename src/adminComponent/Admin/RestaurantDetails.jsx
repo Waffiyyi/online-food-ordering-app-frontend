@@ -1,13 +1,23 @@
 import React from 'react';
-import { Button, Card, CardContent, CardHeader, Grid } from "@mui/material";
+import {
+  Button,
+  Card,
+  CardContent,
+  CardHeader,
+  Grid,
+  IconButton,
+} from "@mui/material";
 import InstagramIcon from '@mui/icons-material/Instagram';
 import TwitterIcon from "@mui/icons-material/Twitter";
 import { useDispatch, useSelector } from "react-redux";
 import { updateRestaurantStatus } from "../../State/Restaurant/Action.js";
+import CreateIcon from "@mui/icons-material/Create";
+import {useNavigate} from "react-router-dom";
 
 const RestaurantDetails = () => {
   const { restaurant, loading } = useSelector(store => store);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleRestaurantStatus = () => {
     if (!loading) {
@@ -20,13 +30,14 @@ const RestaurantDetails = () => {
 
   return (
     <div className={'lg:px-20 px-5'}>
+
       <div className={'py-5 flex justify-center items-center gap-5'}>
         <h1
           className={'text-2xl lg:text-7xl text-center font-bold p-5'}
         >
           {restaurant.usersRestaurant?.restaurantName}
         </h1>
-        <div>
+        <div className={'flex align-middle gap-10'}>
           <Button
             color={!restaurant.usersRestaurant?.open ? "primary" : "error"}
             className={'py-[1rem] px-[2rem]'}
@@ -37,6 +48,12 @@ const RestaurantDetails = () => {
           >
             {restaurant.usersRestaurant?.open ? "Close" : "Open"}
           </Button>
+          <IconButton
+            onClick={() => navigate('/admin/restaurant/update-restaurant')}
+            aria-label={"settings"}
+          >
+            <CreateIcon />
+          </IconButton >
         </div>
       </div>
       <Grid container spacing={2}>
@@ -99,28 +116,28 @@ const RestaurantDetails = () => {
                   <p className={'w-48'}>Country</p>
                   <p className={'text-gray-400'}>
                     <span className={'pr-5'}>-</span>
-                    CraveCourier
+                    {restaurant.usersRestaurant.address.country}
                   </p>
                 </div>
                 <div className={'flex'}>
                   <p className={'w-48'}>City</p>
                   <p className={'text-gray-400'}>
                     <span className={'pr-5'}>-</span>
-                    CraveCourier
+                    {restaurant.usersRestaurant.address.city}
                   </p>
                 </div>
                 <div className={'flex'}>
                   <p className={'w-48'}>Postal Code</p>
                   <p className={'text-gray-400'}>
                     <span className={'pr-5'}>-</span>
-                    CraveCourier
+                    {restaurant.usersRestaurant.address.postalCode}
                   </p>
                 </div>
                 <div className={'flex'}>
                   <p className={'w-48'}>Street Address</p>
                   <p className={'text-gray-400'}>
                     <span className={'pr-5'}>-</span>
-                    CraveCourier
+                    {restaurant.usersRestaurant.address.streetAddress}
                   </p>
                 </div>
               </div>
