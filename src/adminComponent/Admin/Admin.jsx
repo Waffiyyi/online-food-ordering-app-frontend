@@ -2,7 +2,6 @@ import React, {useEffect} from 'react';
 import AdminSidebar from "./AdminSidebar.jsx";
 import {Route, Routes} from "react-router-dom";
 import Menu from "../Menu/Menu.jsx";
-import CreateEvent from "../Events/CreateEvent.jsx";
 import FoodCategory from "../FoodCategory/FoodCategory.jsx";
 import RestaurantDetails from "./RestaurantDetails.jsx";
 import Ingredients from "../Ingredients/Ingredients.jsx";

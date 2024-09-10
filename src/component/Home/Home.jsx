@@ -5,8 +5,6 @@ import RestaurantCard from "../Restaurant/RestaurantCard.jsx";
 import {useDispatch, useSelector} from "react-redux";
 import {getAllRestaurantAction} from "../../State/Restaurant/Action.js";
 import {useNavigate} from "react-router-dom";
-import {findCart} from "../../State/Cart/Action.js";
-//const restaurants=[1,1,1,1,1,1,1,1]
 const Home = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate();

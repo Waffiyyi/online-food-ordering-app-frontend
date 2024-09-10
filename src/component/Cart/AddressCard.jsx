@@ -1,6 +1,5 @@
 import React from 'react';
 
-import HomeIcon from'@mui/icons-material/Home';
 import {Button, Card} from "@mui/material";
 import PlaceIcon from "@mui/icons-material/Place";
 import {useSelector} from "react-redux";

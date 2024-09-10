@@ -1,5 +1,5 @@
 import React from 'react';
-import TaskAltIcon from '@mui/icons-material/TaskALt'
+import TaskAltIcon from '@mui/icons-material/TaskAlt'
 import {green} from "@mui/material/colors";
 import {Button, Card} from "@mui/material";
 import {useNavigate} from "react-router-dom";
