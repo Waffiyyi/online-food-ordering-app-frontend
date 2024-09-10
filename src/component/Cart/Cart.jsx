@@ -40,8 +40,14 @@ const Cart = () => {
     const [open, setOpen] = useState(false);
     const handleOpenAddressModal = () => setOpen(true);
     const handleClose = () => setOpen(false);
-    const  createOrderUsingSelectedAddress = () => {
-
+    const createOrderUsingSelectedAddress = (id) => {
+        const data = {
+            jwt: localStorage.getItem("jwt"),
+            order: {
+                restaurantId: cart.cartItems[0].food?.restaurant.id,
+            },
+        };
+        dispatch(createOrder(data,id));
     };
 
     const handleSubmit = (value) => {
@@ -77,17 +83,17 @@ const Cart = () => {
                           </div>
                           <div className={'flex justify-between text-gray-400'}>
                               <p>Delivery Fee</p>
-                              <p>₦21</p>
+                              <p>₦700</p>
                           </div>
                           <div className={'flex justify-between text-gray-400'}>
                               <p>GST and Restaurant Charges</p>
-                              <p>₦33</p>
+                              <p>₦200</p>
                           </div>
                           <Divider />
                       </div>
                       <div className={'flex justify-between text-gray-400'}>
                           <p className={'mt-5'}>Total pay</p>
-                          <p className={'mt-5'}>₦{cart.cart?.total + 33 + 21}</p>
+                          <p className={'mt-5'}>₦{cart.cart?.total + 200 + 700}</p>
                       </div>
                   </div>
               </section>
@@ -99,13 +105,14 @@ const Cart = () => {
                       </h1>
                       <div className={'flex gap-5 flex-wrap justify-center'}>
                           {auth.user?.addresses.map((i) => <AddressCard key={i} item={i}
-                                                                        handleSelectAddress={createOrderUsingSelectedAddress} />
+                                                                        showButton={true}
+                                                                        handleSelectAddress={()=>createOrderUsingSelectedAddress(i.id)} />
                           )}
                           <Card className={'flex gap-5 w-64 p-5'}>
                               <AddLocationIcon />
                               <div className={'space-y-3 text-gray-400'}>
                                   <h1 className={'font-semibold text-lg text-white'}>Add New Address</h1>
-                                  <Button variant={'outlined'} fullWidth onClick={handleOpenAddressModal}>Add</Button>
+                                  <Button disabled={!cart.cartItems[0]?.food} variant={'outlined'} fullWidth onClick={handleOpenAddressModal}>Add</Button>
                               </div>
                           </Card>
                       </div>
@@ -178,7 +185,7 @@ const Cart = () => {
                                     />
                                 </Grid>
                                 <Grid item xs={12}>
-                                    <Button fullWidth variant={'contained'} type={'submit'} color={'primary'}>Deliver Here</Button>
+                                    <Button  fullWidth variant={'contained'} type={'submit'} color={'primary'}>Deliver Here</Button>
                                 </Grid>
                             </Grid>
                         </Form>

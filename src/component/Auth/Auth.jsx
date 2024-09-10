@@ -26,7 +26,7 @@ const Auth = () => {
         <Box sx={style}>
           {location.pathname === "/account/register" ? <RegisterForm /> :
             <LoginForm />}
-          {error.error && <p className={'py-2 space-y-2 text-gray-500 text-sm' +
+          {error.error && <p className={'py-2 space-y-2 text-red-600 text-sm' +
             ' text-center' +
             ' mb-5'}>{error.error}</p>}
         </Box >

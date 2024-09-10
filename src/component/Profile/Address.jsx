@@ -5,8 +5,6 @@ import {Card} from "@mui/material";
 
 const Address = () => {
     const {auth} = useSelector((store) => store)
-    // const dispatch = useDispatch();
-    console.log("auth.user.address", auth.user?.addresses)
     return (
       <section className={'flex justify-center mt-10 px-5 pb-10 lg:pb-0'}>
           <div className={'flex gap-5 flex-wrap justify-center'}>

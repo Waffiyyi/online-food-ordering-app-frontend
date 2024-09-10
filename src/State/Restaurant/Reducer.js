@@ -21,6 +21,7 @@ const restaurantReducer = (state = initialState, action) => {
         case actionTypes.CREATE_CATEGORY_REQUEST:
         case actionTypes.GET_RESTAURANT_CATEGORY_REQUEST:
         case actionTypes.UPDATE_RESTAURANT_STATUS_REQUEST:
+        case actionTypes.SEARCH_RESTAURANT_REQUEST:
             return {
                 ...state,
                 loading: true,
@@ -34,6 +35,12 @@ const restaurantReducer = (state = initialState, action) => {
                 usersRestaurant: action.payload,
             };
         case actionTypes.GET_ALL_RESTAURANT_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                restaurants: action.payload,
+            };
+        case actionTypes.SEARCH_RESTAURANT_SUCCESS:
             return {
                 ...state,
                 loading: false,
@@ -114,6 +121,7 @@ const restaurantReducer = (state = initialState, action) => {
         case actionTypes.GET_ALL_EVENT_FAILURE:
         case actionTypes.GET_RESTAURANT_EVENT_FAILURE:
         case actionTypes.DELETE_EVENT_FAILURE:
+        case actionTypes.SEARCH_RESTAURANT_FAILURE:
             return {
                 ...state,
                 loading: false,

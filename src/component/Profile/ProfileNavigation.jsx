@@ -1,7 +1,6 @@
 import React, {Fragment, useState} from 'react';
 import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import HomeIcon from '@mui/icons-material/Home';
 import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
 import NotificationsActiveIcon from '@mui/icons-material/NotificationsActive';
 import EventIcon from '@mui/icons-material/Event';
@@ -12,6 +11,7 @@ import {useDispatch} from "react-redux";
 import {logout} from "../../State/Authenthication/Action.js";
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
+import PlaceIcon from '@mui/icons-material/Place';
 
 const menu = [
   {
@@ -24,7 +24,7 @@ const menu = [
   },
   {
     title: "Address",
-    icon: <HomeIcon />,
+    icon: <PlaceIcon/>,
   },
   {
     title: "Payments",

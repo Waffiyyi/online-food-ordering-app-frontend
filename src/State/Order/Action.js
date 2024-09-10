@@ -6,22 +6,24 @@ import {
     GET_USER_ORDER_REQUEST, GET_USER_ORDER_SUCCESS
 } from "./ActionType.js";
 import {handleError} from "../Error/Reducer.js";
-import {CREATE_MENU_ITEM_FAILURE} from "../Menu/ActionType.js";
+import {clearCart} from "../Cart/Action.js";
 
-export const createOrder = (reqData) => {
+export const createOrder = (reqData, addressId) => {
     return async (dispatch) => {
         dispatch({type: CREATE_ORDER_REQUEST});
         try {
-            const {data} = await api.post("api/order/create", reqData.order, {
+            const {data} = await api.post(`api/order/create?addressId=${addressId}`, reqData.order, {
                 headers: {
                     Authorization: `Bearer ${reqData.jwt}`
                 },
             });
-            if(data.payment_url) {
-                window.location.href = data.payment_url;
-            }
             console.log("created order data", data)
             dispatch({type: CREATE_ORDER_SUCCESS, payload: data})
+            if(data.payment_url) {
+                window.location.href = data.payment_url;
+                // dispatch(clearCart())
+            }
+
         } catch (error) {
             console.log("", error)
             dispatch(handleError(CREATE_ORDER_FAILURE, error.response.data.errorMessage ||error.response?.data?.message || error.message));
