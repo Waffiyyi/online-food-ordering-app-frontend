@@ -2,7 +2,7 @@ import React, {Fragment, useState} from 'react';
 import {Dashboard, ShoppingBag} from "@mui/icons-material";
 import ShopTwoIcon from '@mui/icons-material/ShopTwo';
 import CategoryIcon from '@mui/icons-material/Category';
-import FastFoodIcon from '@mui/icons-material/FastFood';
+import FastFoodIcon from '@mui/icons-material/Fastfood';
 import EventIcon from '@mui/icons-material/Event';
 import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
 import LogoutIcon from "@mui/icons-material/Logout";
