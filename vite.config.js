@@ -13,4 +13,5 @@ export default defineConfig({
   server: {
     historyApiFallback: true,
   },
+  base: './', // Ensures the paths are correctly resolved in production
 })
