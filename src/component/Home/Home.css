@@ -13,7 +13,7 @@
 @media (max-width: 768px) {
     .banner {
         height: 60vh;
-        background-position: top center;
+        background-position: 32% center;
     }
 }
 
