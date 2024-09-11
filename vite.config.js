@@ -6,12 +6,6 @@ export default defineConfig({
   plugins: [react()],
   build: {
     chunkSizeWarningLimit: 3000,
-    rollupOptions: {
-      input: '/index.html',
-    },
   },
-  server: {
-    historyApiFallback: true,
-  },
-  base: './', // Ensures the paths are correctly resolved in production
+  base: './',
 })
