@@ -21,7 +21,7 @@ function App() {
   }, [auth.jwt]);
 
   useEffect(() => {
-    if(auth.user?.role==="ROLE_RESTAURANT_OWNER" && !restaurant.usersRestaurant)
+    if(auth.user?.role==="ROLE_RESTAURANT_OWNER" && restaurant.usersRestaurant)
       dispatch(getRestaurantByUserId(auth.jwt || jwt));
   }, [auth.user]);
   return (

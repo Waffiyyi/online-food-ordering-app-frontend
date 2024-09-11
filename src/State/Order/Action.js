@@ -9,10 +9,15 @@ import {handleError} from "../Error/Reducer.js";
 import {clearCart} from "../Cart/Action.js";
 
 export const createOrder = (reqData, addressId) => {
+    let createOrderUrl = ""
+    if(addressId){
+        createOrderUrl  = `api/order/create?addressId=${addressId}`
+    }
+    else createOrderUrl = "api/order/create"
     return async (dispatch) => {
         dispatch({type: CREATE_ORDER_REQUEST});
         try {
-            const {data} = await api.post(`api/order/create?addressId=${addressId}`, reqData.order, {
+            const {data} = await api.post(`${createOrderUrl}`, reqData.order, {
                 headers: {
                     Authorization: `Bearer ${reqData.jwt}`
                 },

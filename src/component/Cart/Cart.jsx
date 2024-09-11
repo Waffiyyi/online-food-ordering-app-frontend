@@ -136,7 +136,7 @@ const Cart = () => {
                                       label={"Place"}
                                       fullWidth
                                       variant={"outlined"}
-                                      error={touched.postalCode && !!errors.postalCode}
+                                      error={touched.place && !!errors.place}
                                       helperText={<ErrorMessage name="place" />}
                                     />
                                 </Grid>
