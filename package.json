@@ -43,5 +43,7 @@
   },
   "engines": {
     "node": ">=16.x"
-  }
+  },
+  "build": "npm run generate-html && vite build",
+  "generate-html": "mkdir -p dist && cp index.html dist/"
 }
