@@ -7,14 +7,13 @@ import {getAllRestaurantAction} from "../../State/Restaurant/Action.js";
 import {useNavigate} from "react-router-dom";
 const Home = () => {
     const dispatch = useDispatch()
-    const navigate = useNavigate();
     const jwt = localStorage.getItem("jwt")
     const {restaurant, auth} = useSelector(store=> store)
 
     useEffect(()=>{
         if(auth.jwt || jwt)
             dispatch(getAllRestaurantAction(jwt))
-    }, [])
+    }, [auth.jwt, dispatch, jwt])
 
 
     return (

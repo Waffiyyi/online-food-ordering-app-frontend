@@ -14,6 +14,7 @@ import {Field, Form, Formik} from "formik";
 import {useNavigate} from "react-router-dom";
 import {loginUser, registerUser} from "../../State/Authenthication/Action.js";
 import {useDispatch, useSelector} from "react-redux";
+import CustomButton from "../../CustomButton.jsx";
 
 const initialValues = {
   fullName: "",
@@ -87,15 +88,7 @@ const RegisterForm = () => {
               </Field >
 
             </FormControl >
-
-            <Button
-              sx={{mt: 5, padding: "1rem"}}
-              fullWidth
-              type={'submit'}
-              variant={'contained'}
-            >Register {
-              auth.isLoading && <CircularProgress sx={{marginLeft: "10px"}}/>
-            }</Button >
+            <CustomButton isLoading={auth.isLoading} text={"Create Account"} type={'submit'}/>
           </Form >
         </Formik >
         <Typography variant={"body2"} align={"center"} sx={{mt: 3}}>

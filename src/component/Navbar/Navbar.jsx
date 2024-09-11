@@ -12,9 +12,9 @@ import {searchRestaurant} from "../../State/Restaurant/Action.js";
 const Navbar = () => {
   const {auth, cart} = useSelector(store => store);
   const navigate = useNavigate();
-  const [showSearchBar, setShowSearchBar] = useState(false); // State to control search bar visibility
-  const [searchQuery, setSearchQuery] = useState(""); // State to hold the search query
-  const searchRef = useRef(); // Reference to the search bar
+  const [showSearchBar, setShowSearchBar] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+  const searchRef = useRef();
   const dispatch = useDispatch();
 
   const handleAvatarClick = () => {
@@ -49,7 +49,7 @@ const Navbar = () => {
 
   const handleBlur = (e) => {
     if (!searchRef.current.contains(e.relatedTarget)) {
-      setShowSearchBar(false); // Close the search bar when clicking outside
+      setShowSearchBar(false);
     }
   };
 

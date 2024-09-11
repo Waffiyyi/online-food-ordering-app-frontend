@@ -18,12 +18,12 @@ function App() {
       dispatch(getUser(auth.jwt || jwt));
       dispatch(findCart(auth.jwt || jwt));
     }
-  }, [auth.jwt]);
+  }, [auth.jwt, dispatch, jwt]);
 
   useEffect(() => {
     if(auth.user?.role==="ROLE_RESTAURANT_OWNER" && restaurant.usersRestaurant)
       dispatch(getRestaurantByUserId(auth.jwt || jwt));
-  }, [auth.user]);
+  }, [auth.jwt, auth.user, dispatch, jwt, restaurant.usersRestaurant]);
   return (
     <ThemeProvider theme={darkTheme}>
       <CssBaseline />

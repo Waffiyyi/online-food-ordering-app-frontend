@@ -10,6 +10,7 @@ import {Field, Form, Formik} from "formik";
 import {useNavigate} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {loginUser} from "../../State/Authenthication/Action.js";
+import CustomButton from "../../CustomButton.jsx";
 
 const initialValues = {
   username: "",
@@ -22,7 +23,6 @@ const LoginForm = () => {
   const {auth} = useSelector((store) => store);
 
   const handleSubmit = (values) => {
-    console.log("credentials", values)
     dispatch(loginUser({userData: values, navigate}))
   };
 
@@ -64,18 +64,7 @@ const LoginForm = () => {
               type={"password"}
               margin={"normal"}
             />
-            <Button
-              sx={{
-                mt: 5,
-                padding: "1rem",
-                cursor: auth.isLoading ? 'not-allowed' : 'pointer',
-              }}
-              fullWidth
-              type={'submit'}
-              variant={'contained'}
-            >Login {
-              auth.isLoading && <CircularProgress sx={{marginLeft: "10px"}}/>
-            }</Button >
+         <CustomButton isLoading={auth.isLoading} text={"Login"} type={'submit'}/>
           </Form >
         </Formik >
         <Typography variant={"body2"} align={"center"} sx={{mt: 3}}>

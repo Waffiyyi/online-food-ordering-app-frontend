@@ -13,8 +13,7 @@ import {
 } from "../../State/RestaurantOrder/Action.js";
 
 const orderStatus = [
-  {label: "Pending", value: "PENDING"},
-  {label: "Completed", value: "COMPLETED"},
+  {label: "Payment Completed", value: "PAYMENT_COMPLETED"},
   {label: "Out For Delivery", value: "OUT_FOR_DELIVERY"},
   {label: "Delivered", value: "DELIVERED"},
   {label: "All", value: ""},

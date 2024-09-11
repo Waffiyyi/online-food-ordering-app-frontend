@@ -15,6 +15,9 @@ import { createEvent } from "../../State/Restaurant/Action.js";
 import { uploadImageToCloudinary } from "../util/UploadToCloudinary";
 import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
 import CloseIcon from "@mui/icons-material/Close";
+import CustomButton from "../../CustomButton.jsx";
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
 
 const initialValues = {
   image: "",
@@ -23,6 +26,13 @@ const initialValues = {
   startDateTime: null,
   endDateTime: null,
 };
+
+const validationSchema = Yup.object({
+  location: Yup.string().required('Location is required'),
+  eventName: Yup.string().required('Event Name is required'),
+  startDateTime: Yup.date().required('Start date and time is required').nullable(),
+  endDateTime: Yup.date().required('End date and time is required').nullable(),
+});
 
 const style = {
   position: 'absolute',
@@ -42,9 +52,7 @@ const CreateEvent = () => {
   const [open, setOpen] = useState(false);
   const jwt = localStorage.getItem("jwt");
   const { restaurant } = useSelector((store) => store);
-
   const dispatch = useDispatch();
-  const [formValues, setFormValues] = useState(initialValues);
   const [uploadingImage, setUploadingImage] = useState(false);
 
   const handleOpen = () => {
@@ -55,53 +63,34 @@ const CreateEvent = () => {
     setOpen(false);
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const requestData = {
-      data: formValues,
-      restaurantId: restaurant.usersRestaurant?.id,
-      jwt: jwt,
-    }
-    dispatch(createEvent({
-      requestData,
-    }))
-    setOpen(false)
-    setFormValues(initialValues);
-  };
-
   const handleImageChange = async (e) => {
     const file = e.target.files[0];
     if (file) {
       setUploadingImage(true);
       const uploadedImage = await uploadImageToCloudinary(file);
-      setFormValues((prevState) => ({
-        ...prevState,
-        image: uploadedImage,
-      }));
+      formik.setFieldValue('image', uploadedImage);
       setUploadingImage(false);
     }
   };
 
   const handleRemoveImage = () => {
-    setFormValues((prevState) => ({
-      ...prevState,
-      image: "",
-    }));
+    formik.setFieldValue('image', "");
   };
 
-  const handleFormChange = (e) => {
-    setFormValues((prevState) => ({
-      ...prevState,
-      [e.target.name]: e.target.value,
-    }));
-  };
-
-  const handleDateChange = (date, dateType) => {
-    setFormValues((prevState) => ({
-      ...prevState,
-      [dateType]: date,
-    }));
-  };
+  const formik = useFormik({
+    initialValues: initialValues,
+    validationSchema: validationSchema,
+    onSubmit: (values) => {
+      const requestData = {
+        data: values,
+        restaurantId: restaurant.usersRestaurant?.id,
+        jwt: jwt,
+      };
+      dispatch(createEvent({ requestData }));
+      setOpen(false);
+      formik.resetForm();
+    },
+  });
 
   return (
     <div>
@@ -117,7 +106,7 @@ const CreateEvent = () => {
           aria-describedby="modal-modal-description"
         >
           <Box sx={{ ...style }}>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={formik.handleSubmit}>
               <Grid container spacing={3}>
                 <Grid item xs={12} className="flex flex-wrap gap-5">
                   <input
@@ -137,11 +126,11 @@ const CreateEvent = () => {
                       </div>
                     )}
                   </label>
-                  {formValues.image && (
+                  {formik.values.image && (
                     <div className="relative">
                       <img
                         className="w-24 h-24 object-cover"
-                        src={formValues.image}
+                        src={formik.values.image}
                         alt=""
                       />
                       <IconButton
@@ -166,8 +155,11 @@ const CreateEvent = () => {
                     name="location"
                     label="Location"
                     variant="outlined"
-                    onChange={handleFormChange}
-                    value={formValues.location}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    value={formik.values.location}
+                    error={formik.touched.location && Boolean(formik.errors.location)}
+                    helperText={formik.touched.location && formik.errors.location}
                   />
                 </Grid>
                 <Grid item xs={12}>
@@ -177,8 +169,11 @@ const CreateEvent = () => {
                     name="eventName"
                     label="Event Name"
                     variant="outlined"
-                    onChange={handleFormChange}
-                    value={formValues.eventName}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    value={formik.values.eventName}
+                    error={formik.touched.eventName && Boolean(formik.errors.eventName)}
+                    helperText={formik.touched.eventName && formik.errors.eventName}
                   />
                 </Grid>
                 <Grid item xs={12}>
@@ -186,13 +181,15 @@ const CreateEvent = () => {
                     <DateTimePicker
                       renderInput={(props) => <TextField {...props} />}
                       label="Start Date and Time"
-                      value={formValues.startDateTime}
+                      value={formik.values.startDateTime}
                       onChange={(newValue) =>
-                        handleDateChange(newValue, "startDateTime")
+                        formik.setFieldValue("startDateTime", newValue)
                       }
                       inputFormat="MM/DD/YYYY hh:mm A"
                       className="w-full"
                       sx={{ width: "100%" }}
+                      error={formik.touched.startDateTime && Boolean(formik.errors.startDateTime)}
+                      helperText={formik.touched.startDateTime && formik.errors.startDateTime}
                     />
                   </LocalizationProvider>
                 </Grid>
@@ -201,21 +198,27 @@ const CreateEvent = () => {
                     <DateTimePicker
                       renderInput={(props) => <TextField {...props} />}
                       label="End Date and Time"
-                      value={formValues.endDateTime}
+                      value={formik.values.endDateTime}
                       onChange={(newValue) =>
-                        handleDateChange(newValue, "endDateTime")
+                        formik.setFieldValue("endDateTime", newValue)
                       }
                       inputFormat="MM/DD/YYYY hh:mm A"
                       className="w-full"
                       sx={{ width: "100%" }}
+                      error={formik.touched.endDateTime && Boolean(formik.errors.endDateTime)}
+                      helperText={formik.touched.endDateTime && formik.errors.endDateTime}
                     />
                   </LocalizationProvider>
                 </Grid>
               </Grid>
               <div className="mt-2">
-                <Button variant="contained" color="primary" type="submit">
-                  Create Event
-                </Button>
+                <CustomButton
+                  isLoading={restaurant.loading}
+                  fullWidth={false}
+                  text={`Create Event`}
+                  type={'submit'}
+                  style={{ mt: 2, padding: 1 }}
+                />
               </div>
             </form>
           </Box>

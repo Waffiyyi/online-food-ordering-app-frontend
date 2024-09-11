@@ -10,6 +10,7 @@ const initialState = {
 const orderReducer = (state = initialState, action)=>{
     switch (action.type){
         case actionTypes.GET_USER_ORDER_REQUEST:
+        case actionTypes.CREATE_ORDER_REQUEST:
             return {
                 ...state,
                 error: null,

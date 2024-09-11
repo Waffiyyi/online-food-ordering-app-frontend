@@ -15,22 +15,19 @@ const AdminEvent = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getRestaurantEvents(
-      {
-        restaurantId: restaurant.usersRestaurant?.id,
-        jwt,
-      },
-    ))
+    dispatch(getRestaurantEvents({
+      restaurantId: restaurant.usersRestaurant?.id,
+      jwt,
+    }))
   }, [])
 
   const handleDeleteEvent = (eventId) => {
-    dispatch(deleteEvent(
-      {
-        eventId,
-        jwt,
-      },
-    ))
+    dispatch(deleteEvent({
+      eventId,
+      jwt,
+    }))
   }
+
   return (
     <div >
       <Grid container spacing={2}>
@@ -43,20 +40,21 @@ const AdminEvent = () => {
             {
               restaurant.restaurantsEvents.map((item) =>
                 <EventCard
-                key={item.id}
-                image={item.image}
-                location={item.location}
-                eventName={item.eventName}
-                startDateTime={dayjs(item.startDateTime).format("MM/DD/YYYY hh:mm A")}
-                endDateTime={dayjs(item.endDateTime).format("MM/DD/YYYY hh:mm A")}
-                restaurantName={restaurant.usersRestaurant.restaurantName}
-                isAdmin={true}
-                handleDelete={() => handleDeleteEvent(item.id)}
-              />)
+                  key={item.id}
+                  image={item.image}
+                  location={item.location}
+                  eventName={item.eventName}
+                  startDateTime={dayjs(item.startDateTime)
+                  .format("ddd, DD MMM YYYY hh:mm A")}
+                  endDateTime={dayjs(item.endDateTime)
+                  .format("ddd, DD MMM YYYY hh:mm A")}
+                  restaurantName={restaurant.usersRestaurant.restaurantName}
+                  isAdmin={true}
+                  handleDelete={() => handleDeleteEvent(item.id)}
+                />,
+              )
             }
-
-          </div>
-
+          </div >
         </Grid >
       </Grid >
     </div >

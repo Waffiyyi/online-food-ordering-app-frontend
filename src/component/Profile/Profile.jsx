@@ -7,6 +7,7 @@ import Address from "./Address.jsx";
 import Favorites from "./Favorites.jsx";
 import Event from "./Event.jsx";
 import {useMediaQuery} from "@mui/material";
+import Notifications from "./Notifications.jsx";
 
 
 const Profile = () => {
@@ -23,6 +24,7 @@ const Profile = () => {
                     <Route path={'/address'} element={<Address/>}/>
                     <Route path={'/favorites'} element={<Favorites/>}/>
                     <Route path={'/events'} element={<Event/>}/>
+                    <Route path={'/notifications'} element={<Notifications/>}/>
                 </Routes>
 
             </div>

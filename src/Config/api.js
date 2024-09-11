@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const API_URL = "https://crave-courier.onrender.com";
+export const API_URL = "http://localhost:8011";
 
 export const api = axios.create(
     {
