@@ -9,7 +9,7 @@ const OrderCard = ({item, order}) => {
                      src={item.food.images[0]} alt={'food image'}/>
                 <div>
                     <p>{item.food.name}</p>
-                    <p>${item.food.price}</p>
+                    <p>${item.food.totalPrice}</p>
                 </div>
             </div>
             <div>
