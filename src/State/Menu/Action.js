@@ -29,10 +29,8 @@ export const createMenuItem = ({menu, jwt}) => {
                     Authorization: `Bearer ${jwt}`
                 },
             });
-            console.log("created menu", data)
             dispatch({type: CREATE_MENU_ITEM_SUCCESS, payload: data})
         } catch (error) {
-            console.log("", error)
             dispatch(handleError(CREATE_MENU_ITEM_FAILURE, error.response.data.errorMessage ||error.response?.data?.message || error.message));
         }
     }
@@ -47,11 +45,8 @@ export const getMenuItemsByRestaurantId = (reqData) => {
                     Authorization: `Bearer ${reqData.jwt}`,
                 },
             });
-            console.log(reqData.restaurantId, "restaurantId for menu items")
-            console.log("menu item by restaurants", data)
             dispatch({type: GET_MENU_ITEM_BY_RESTAURANT_ID_SUCCESS, payload: data})
         } catch (error) {
-            console.log("", error)
             dispatch(handleError(GET_MENU_ITEM_BY_RESTAURANT_ID_FAILURE, error.response.data.errorMessage ||error.response?.data?.message || error.message));
         }
     }
@@ -66,11 +61,8 @@ export const getMenuItems = (reqData) => {
                     Authorization: `Bearer ${reqData.jwt}`,
                 },
             });
-            console.log(reqData.restaurantId, "restaurantId")
-            console.log("menu item", data)
             dispatch({type: GET_MENU_ITEM_SUCCESS, payload: data})
         } catch (error) {
-            console.log("", error)
             dispatch(handleError(GET_MENU_ITEM_FAILURE, error.response.data.errorMessage ||error.response?.data?.message || error.message));
         }
     }
@@ -85,10 +77,8 @@ export const searchMenuItem = ({keyword, jwt}) => {
                     Authorization: `Bearer ${jwt}`
                 },
             });
-            console.log("search menu", data)
             dispatch({type: SEARCH_MENU_ITEM_SUCCESS, payload: data})
         } catch (error) {
-            console.log("", error)
             dispatch(handleError(SEARCH_MENU_ITEM_FAILURE, error.response.data.errorMessage ||error.response?.data?.message || error.message));
         }
     }
@@ -121,10 +111,8 @@ export const updateMenuItemAvailability = ({foodId, jwt}) => {
                     Authorization: `Bearer ${jwt}`
                 },
             });
-            console.log("update menu items availability", data)
             dispatch({type: UPDATE_MENU_ITEM_AVAILABILITY_SUCCESS, payload: data})
         } catch (error) {
-            console.log("", error)
             dispatch(handleError(UPDATE_MENU_ITEM_AVAILABILITY_FAILURE, error.response.data.errorMessage ||error.response?.data?.message || error.message));
         }
     }
@@ -140,10 +128,8 @@ export const deleteFood = ({foodId, jwt}) => {
                     Authorization: `Bearer ${jwt}`
                 },
             });
-            console.log("DELETE MENU", data)
             dispatch({type: DELETE_MENU_ITEM_SUCCESS, payload: foodId})
         } catch (error) {
-            console.log("", error)
             dispatch(handleError(DELETE_MENU_ITEM_FAILURE, error.response.data.errorMessage ||error.response?.data?.message || error.message));
         }
     }

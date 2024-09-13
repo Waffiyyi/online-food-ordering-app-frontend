@@ -30,9 +30,9 @@ import {
 } from "../Order/ActionType.js";
 import {
   ADD_TO_FAVORITE_FAILURE,
-  GET_USER_FAILURE,
+  GET_USER_FAILURE, INITIATE_RESET_PASSWORD_FAILURE,
   LOGIN_FAILURE,
-  REGISTER_FAILURE,
+  REGISTER_FAILURE, RESET_PASSWORD_FAILURE,
 } from "../Authenthication/ActionType.js";
 import {
   ADD_ITEM_TO_CART_FAILURE, CLEAR_CART_FAILURE,
@@ -105,6 +105,8 @@ export const errorReducer = (state = initialState, action) => {
     case GET_ALL_EVENT_FAILURE:
     case GET_RESTAURANT_EVENT_FAILURE:
     case DELETE_EVENT_FAILURE:
+    case INITIATE_RESET_PASSWORD_FAILURE:
+    case RESET_PASSWORD_FAILURE:
 
       return {
         ...state,

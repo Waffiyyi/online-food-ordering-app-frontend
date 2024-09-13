@@ -32,10 +32,8 @@ export const findCart = (jwt) => {
           Authorization: `Bearer ${jwt}`,
         },
       });
-      console.log("find cart ", response.data)
       dispatch({type: FIND_CART_SUCCESS, payload: response.data})
     } catch (error) {
-      console.log("error", error)
       dispatch(handleError(FIND_CART_FAILURE, error.response.data.errorMessage ||error.response?.data?.message || error.message));
     }
   }
@@ -50,10 +48,8 @@ export const getAllCartItems = (reqData) => {
           Authorization: `Bearer ${reqData.jwt}`,
         },
       });
-      console.log("get all cart items", response.data)
       dispatch({type: GET_ALL_CART_ITEMS_SUCCESS, payload: response.data})
     } catch (error) {
-      console.log("error", error)
       dispatch(handleError(GET_ALL_CART_ITEMS_FAILURE, error.response.data.errorMessage ||error.response?.data?.message || error.message));
 
     }
@@ -95,11 +91,9 @@ export const updateCartItem = (reqData) => {
           Authorization: `Bearer ${reqData.jwt}`,
         },
       });
-      console.log("update cart items", data)
       dispatch({type: UPDATE_CART_ITEM_SUCCESS, payload: data})
       dispatch(findCart(reqData.jwt))
     } catch (error) {
-      console.log("error", error)
       dispatch(handleError(UPDATE_CART_ITEM_FAILURE, error.response.data.errorMessage ||error.response?.data?.message || error.message));
     }
   }
@@ -114,10 +108,8 @@ export const removeCartItem = ({cartItemId, jwt}) => {
           Authorization: `Bearer ${jwt}`,
         },
       });
-      console.log("remove cart items", data)
       dispatch({type: REMOVE_CART_ITEM_SUCCESS, payload: data})
     } catch (error) {
-      console.log("error", error)
       dispatch(handleError(REMOVE_CART_ITEM_FAILURE, error.response.data.errorMessage ||error.response?.data?.message || error.message));
     }
   }
@@ -132,10 +124,8 @@ export const clearCart = () => {
           Authorization: `Bearer ${localStorage.getItem("jwt")}`,
         },
       });
-      console.log("remove cart items", data)
       dispatch({type: CLEAR_CART_SUCCESS, payload: data})
     } catch (error) {
-      console.log("error", error)
       dispatch(handleError(CLEAR_CART_FAILURE,error.response.data.errorMessage ||error.response?.data?.message || error.message));
     }
   }

@@ -55,9 +55,7 @@ export const getAllRestaurantAction = (token) => async (dispatch) => {
       },
     });
     dispatch({ type: GET_ALL_RESTAURANT_SUCCESS, payload: data });
-    console.log("all restaurant", data);
   } catch (error) {
-    console.log("get all restaurant error", error)
 
     dispatch(handleError(GET_ALL_RESTAURANT_FAILURE, error.response.data.errorMessage ||error.response?.data?.message || error.message));
   }
@@ -72,10 +70,8 @@ export const getRestaurantById = (reqData) => async (dispatch) => {
       },
     });
     dispatch({ type: GET_RESTAURANT_BY_ID_SUCCESS, payload: response.data });
-    console.log("get restaurant by id success", response.data)
 
   } catch (error) {
-    console.log("error get restaurant id", error)
     dispatch(handleError(GET_RESTAURANT_BY_ID_FAILURE, error.response.data.errorMessage ||error.response?.data?.message || error.message));
   }
 };
@@ -117,7 +113,6 @@ export const updateRestaurant = ({ restaurantId, restaurantData, jwt }) => async
       },
     });
     dispatch({ type: UPDATE_RESTAURANT_SUCCESS, payload: res.data });
-    console.log("update restaurant", res.data)
   } catch (error) {
     dispatch(handleError(UPDATE_RESTAURANT_FAILURE, error.response.data.errorMessage ||error.response?.data?.message || error.message));
   }
@@ -247,7 +242,6 @@ export const searchRestaurant = (keyword, jwt) => async (dispatch) => {
       },
     });
     dispatch({ type: SEARCH_RESTAURANT_SUCCESS, payload: res.data });
-    console.log("success search", res.data)
 
   } catch (error) {
     dispatch(handleError(SEARCH_RESTAURANT_FAILURE, error.response.data.errorMessage ||error.response?.data?.message || error.message));

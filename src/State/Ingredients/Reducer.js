@@ -10,10 +10,21 @@ const initialState = {
 
 const ingredientReducer = (state = initialState, action) =>{
     switch (action.type){
+        case actionType.GET_INGREDIENTS_REQUEST:
+        case actionType.CREATE_INGREDIENT_REQUEST:
+        case actionType.CREATE_INGREDIENT_CATEGORY_REQUEST:
+        case actionType.GET_INGREDIENT_CATEGORY_REQUEST:
+        case actionType.UPDATE_STOCK_REQUEST:
+            return{
+                ...state,
+                loading: true,
+                error: null
+            };
         case actionType.GET_INGREDIENTS:
             return{
                 ...state,
-                ingredients: action.payload
+                ingredients: action.payload,
+                loading: false,
             };
         case actionType.GET_INGREDIENT_CATEGORY_SUCCESS:
             return {

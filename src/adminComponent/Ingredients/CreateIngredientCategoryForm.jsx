@@ -11,7 +11,7 @@ const validationSchema = Yup.object({
 });
 
 const CreateIngredientCategoryForm = () => {
-  const { restaurant} = useSelector(store => store);
+  const { restaurant, ingredients} = useSelector(store => store);
   const jwt = localStorage.getItem("jwt");
   const dispatch = useDispatch();
 
@@ -49,7 +49,7 @@ const CreateIngredientCategoryForm = () => {
             helperText={formik.touched.name && formik.errors.name}
           />
           <CustomButton
-            isLoading={restaurant.loading}
+            isLoading={ingredients.loading}
             fullWidth={false}
             text={`Create Category`}
             type={'submit'}

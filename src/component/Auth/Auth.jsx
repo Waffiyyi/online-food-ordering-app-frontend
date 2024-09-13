@@ -6,6 +6,7 @@ import RegisterForm from "./RegisterForm.jsx";
 import LoginForm from "./LoginForm.jsx";
 import ErrorComponent from "../../GlobalErrorComponent/ErrorComponent.jsx";
 import {useSelector} from "react-redux";
+import ResetPasswordForm from "./ResetPasswordForm.jsx";
 
 const Auth = () => {
   const location = useLocation();
@@ -21,11 +22,13 @@ const Auth = () => {
         open={
           location.pathname === "/account/register"
           || location.pathname === "/account/login"
+          || location.pathname === "/account/reset-password"
         } onClose={handLeOnClose}
       >
         <Box sx={style}>
           {location.pathname === "/account/register" ? <RegisterForm /> :
-            <LoginForm />}
+            location.pathname === "/account/reset-password" ? <ResetPasswordForm /> :
+              <LoginForm />}
           {error.error && <p className={'py-2 space-y-2 text-red-600 text-sm' +
             ' text-center' +
             ' mb-5'}>{error.error}</p>}

@@ -74,6 +74,16 @@ const LoginForm = () => {
             onClick={() => navigate("/account/register")}
           >Register</Button >
         </Typography >
+        <Typography variant={"body2"} align={"center"} sx={{mt: 1}}>
+          Forgot your password?
+          <Button
+            size={"small"}
+            onClick={() => navigate("/account/reset-password")}
+            sx={{fontSize:"11px"}}
+          >
+            Reset Password
+          </Button >
+        </Typography >
       </Box >
     </Box >
   );

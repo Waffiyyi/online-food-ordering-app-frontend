@@ -60,7 +60,7 @@ const AdminSidebar = () => {
         open={isOpen || !isSmallScreen}
         anchor={'left'}
       >
-        <div className={'w-[40vw] lg:w-[20vw] h-[100vh] flex flex-col' +
+        <div className={'w-[55vw] lg:w-[20vw] h-[100vh] flex flex-col' +
           ' justify-center text-xl gap-8 pt-16'}>
           {menu.map((item, i) =>
             <Fragment key={i}>

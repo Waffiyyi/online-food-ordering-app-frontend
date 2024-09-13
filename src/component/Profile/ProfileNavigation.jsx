@@ -81,7 +81,7 @@ const ProfileNavigation = () => {
         sx={{zIndex: 1, position: "sticky"}}
       >
         <div
-          className={'w-[40vw] lg:w-[20vw] h-[100vh] flex flex-col' +
+          className={'w-[55vw] lg:w-[20vw] h-[100vh] flex flex-col' +
             ' justify-center text-xl gap-10 pt-16'}
         >
           {menu.map((item, i) =>

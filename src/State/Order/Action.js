@@ -22,14 +22,12 @@ export const createOrder = (reqData, addressId) => {
                     Authorization: `Bearer ${reqData.jwt}`
                 },
             });
-            console.log("created order data", data)
             dispatch({type: CREATE_ORDER_SUCCESS, payload: data})
             if(data.payment_url) {
                 window.location.href = data.payment_url;
             }
 
         } catch (error) {
-            console.log("", error)
             dispatch(handleError(CREATE_ORDER_FAILURE, error.response.data.errorMessage ||error.response?.data?.message || error.message));
         }
     }
@@ -45,10 +43,8 @@ export const getUsersOrder = (jwt) => {
                 },
             });
 
-            console.log("user order data", data)
             dispatch({type: GET_USER_ORDER_SUCCESS, payload: data})
         } catch (error) {
-            console.log("", error)
             dispatch(handleError(GET_USER_ORDER_FAILURE, error.response.data.errorMessage ||error.response?.data?.message || error.message));
         }
     }

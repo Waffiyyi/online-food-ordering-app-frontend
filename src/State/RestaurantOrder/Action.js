@@ -22,10 +22,8 @@ export const updateOrderStatus = ({orderId, orderStatus, jwt}) => {
                     Authorization: `Bearer ${jwt}`
                 },
             });
-            console.log("update order status", response.data)
             dispatch({type: UPDATE_ORDER_STATUS_SUCCESS, payload: response.data})
         } catch (error) {
-            console.log("update order status", error)
             dispatch(handleError(UPDATE_ORDER_STATUS_FAILURE, error.response.data.errorMessage ||error.response?.data?.message || error.message));
         }
     }
@@ -40,10 +38,8 @@ export const fetchRestaurantOrder = ({restaurantId, jwt}) => {
                     Authorization: `Bearer ${jwt}`
                 },
             });
-            console.log("restaurant order", data)
             dispatch({type: GET_RESTAURANT_ORDER_SUCCESS, payload: data})
         } catch (error) {
-            console.log("fetch estaurant order", error)
             dispatch(handleError(GET_RESTAURANT_ORDER_FAILURE, error.response.data.errorMessage ||error.response?.data?.message || error.message));
         }
     }
@@ -58,10 +54,8 @@ export const fetchRestaurantOrderByStatus = ({restaurantId, orderStatus, jwt}) =
                     Authorization: `Bearer ${jwt}`
                 },
             });
-            console.log("restaurant order", data)
             dispatch({type: GET_RESTAURANT_ORDER_BY_STATUS_SUCCESS, payload: data})
         } catch (error) {
-            console.log("fetch estaurant order", error)
             dispatch(handleError(GET_RESTAURANT_ORDER_BY_STATUS_FAILURE, error.response.data.errorMessage ||error.response?.data?.message || error.message));
         }
     }

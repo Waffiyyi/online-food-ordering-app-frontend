@@ -28,8 +28,13 @@ const validationSchema = Yup.object({
   .typeError('Price must be a number')
   .positive('Price must be a positive number')
   .required('Price is required'),
-  category: Yup.string()
-  .required('Category is required'),
+  category: Yup.object()
+  .nullable()
+  .required('Category is required')
+  .shape({
+    id: Yup.string().required(),
+    name: Yup.string().required(),
+  }),
   ingredientItems: Yup.array()
   .min(1, 'At least one ingredient is required'),
   seasonal: Yup.boolean()
@@ -63,7 +68,7 @@ const CreateMenuForm = () => {
 
   const formik = useFormik({
       initialValues,
-      validationSchema, // Apply Yup validation schema
+      validationSchema,
       onSubmit: (values) => {
         values.restaurantId = restaurant.usersRestaurant.id;
         dispatch(createMenuItem({menu: values, jwt}));

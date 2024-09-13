@@ -77,7 +77,7 @@ const CreateIngredientForm = () => {
               <p style={{ color: 'red' }}>{formik.errors.categoryId}</p>
             )}
           </FormControl>
-          <CustomButton isLoading={restaurant.loading} fullWidth={false} text={`Create Ingredient`} type={'submit'} style={{ mt: 0, padding: 1 }} />
+          <CustomButton isLoading={ingredients.loading} fullWidth={false} text={`Create Ingredient`} type={'submit'} style={{ mt: 0, padding: 1 }} />
         </form>
       </div>
     </div>
