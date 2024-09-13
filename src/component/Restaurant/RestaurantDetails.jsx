@@ -46,7 +46,7 @@ const RestaurantDetails = () => {
   const {restaurant, menu} = useSelector(store => store);
   const [selectedCategory, setSelectedCategory] = useState("");
 
-
+console.log(restaurant)
 
   const {id} = useParams();
 
@@ -112,11 +112,11 @@ const RestaurantDetails = () => {
           <div className={'space-y-3 mt-3'}>
             <p className={'text-gray-500 items-center gap-3'}>
               <LocationOnIcon />
-              <span >Mumbai, Maharstra</span >
+              <span >{restaurant.restaurant?.address.city}</span >
             </p >
             <p className={'text-gray-500 items-center gap-3'}>
               <CalendarTodayIcon />
-              <span > Mon-Sun : 9:00 PM (Today)</span >
+              <span > {restaurant.restaurant?.openingHours} (Today)</span >
             </p >
           </div >
 

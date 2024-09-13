@@ -19,7 +19,7 @@ const MenuCard = ({item}) => {
   const [popupMessage, setPopupMessage] = useState('');
   const [popupOpen, setPopupOpen] = useState(false);
   const dispatch = useDispatch();
-  const {menu} = useSelector(store => store);
+  const {cart} = useSelector(store => store);
 
   const handleCheckBoxChange = (itemName) => {
     if (selectedIngredients.includes(itemName)) {
@@ -98,7 +98,7 @@ const MenuCard = ({item}) => {
             <div className={'pt-5'}>
               <Button
                 variant={"contained"}
-                disabled={false}
+                disabled={cart.loading}
                 type={"submit"}
               >
                 Add to cart

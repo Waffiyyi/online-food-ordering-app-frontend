@@ -14,6 +14,7 @@ const cartReducer = (state = initialState, action) =>{
         case actionTypes.GET_ALL_CART_ITEMS_REQUEST:
         case actionTypes.UPDATE_CART_ITEM_REQUEST:
         case actionTypes.REMOVE_CART_ITEM_REQUEST:
+        case actionTypes.ADD_ITEM_TO_CART_REQUEST:
             return{
                 ...state,
                 loading: true,
