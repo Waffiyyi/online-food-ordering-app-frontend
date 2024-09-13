@@ -1,4 +1,5 @@
 import * as actionTypes from './ActionType';
+import {LOGOUT} from "../Authenthication/ActionType.js";
 
 const initialState= {
     menuItems: [],
@@ -78,6 +79,9 @@ const menuItemReducer= (state = initialState, action) =>{
                 error: action.payload,
                 message: null
             };
+
+        case LOGOUT:
+            return initialState;
 
         default:
             return state;

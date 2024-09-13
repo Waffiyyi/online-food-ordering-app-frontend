@@ -1,4 +1,5 @@
 import * as actionTypes from "./ActionType";
+import {LOGOUT} from "../Authenthication/ActionType.js";
 
 const initialState = {
     restaurants: [],
@@ -127,6 +128,9 @@ const restaurantReducer = (state = initialState, action) => {
                 loading: false,
                 error: action.payload,
             };
+
+        case LOGOUT:
+            return initialState;
         default:
             return state;
     }

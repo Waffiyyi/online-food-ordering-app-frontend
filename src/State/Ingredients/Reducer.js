@@ -1,4 +1,5 @@
 import * as actionType from "./ActionType";
+import {LOGOUT} from "../Authenthication/ActionType.js";
 
 const initialState = {
     ingredients: [],
@@ -62,6 +63,8 @@ const ingredientReducer = (state = initialState, action) =>{
                 loading: false,
                 error: action.payload,
             };
+        case LOGOUT:
+            return initialState;
 
         default:
             return state;

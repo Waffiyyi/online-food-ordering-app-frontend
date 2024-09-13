@@ -1,10 +1,5 @@
 import * as actionType from "./ActionType";
-import {
-    GET_RESTAURANT_ORDER_FAILURE,
-    GET_RESTAURANT_ORDER_SUCCESS,
-    UPDATE_ORDER_STATUS_FAILURE,
-    UPDATE_ORDER_STATUS_SUCCESS
-} from "./ActionType";
+import {LOGOUT} from "../Authenthication/ActionType.js";
 
 const initialState = {
     loading: false,
@@ -55,6 +50,9 @@ const restaurantOrderReducer = (state = initialState, action)=>{
                 loading: false,
                 error: action.error
             }
+
+        case LOGOUT:
+            return initialState;
 
         default:
             return state

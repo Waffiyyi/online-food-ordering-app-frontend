@@ -1,4 +1,5 @@
 import * as actionTypes from "./ActionType";
+import {LOGOUT} from "../Authenthication/ActionType.js";
 
 const initialState = {
     loading: false,
@@ -30,6 +31,9 @@ const orderReducer = (state = initialState, action)=>{
                 error: action.payload,
                 loading: false
             };
+
+        case LOGOUT:
+            return initialState;
 
         default:
             return state;
