@@ -14,7 +14,7 @@ function App() {
   const {auth, restaurant} = useSelector(store => store);
 
   useEffect(() => {
-    if (jwt || auth.jwt) {
+    if (auth.jwt) {
       dispatch(getUser(auth.jwt || jwt));
       dispatch(findCart(auth.jwt || jwt));
     }
