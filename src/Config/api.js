@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const API_URL = "https://crave-courier.onrender.com";
+export const API_URL = "https://underground-natassia-cravecourier-6016fb89.koyeb.app";
 
 export const api = axios.create(
     {
