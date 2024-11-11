@@ -1,36 +1,42 @@
-import React, { useState } from 'react';
-import { Button, TextField } from "@mui/material";
-import { useDispatch, useSelector } from "react-redux";
-import { createCategory } from "../../State/Restaurant/Action.js";
+import React, {useState} from 'react';
+import {Button, TextField} from "@mui/material";
+import {useDispatch, useSelector} from "react-redux";
+import {createCategory} from "../../State/Restaurant/Action.js";
 import CustomButton from "../../CustomButton.jsx";
-import { useFormik } from 'formik';
+import {useFormik} from 'formik';
 import * as Yup from 'yup';
 
 const validationSchema = Yup.object({
   categoryName: Yup.string().required('Category name is required'),
 });
 
-const CreateFoodCategoryForm = () => {
-  const { restaurant } = useSelector(store => store);
+const CreateFoodCategoryForm = ({onSuccess}) => {
+  const {restaurant} = useSelector(store => store);
   const dispatch = useDispatch();
 
   const formik = useFormik({
-    initialValues: { categoryName: "" },
+    initialValues: {categoryName: ""},
     validationSchema: validationSchema,
     onSubmit: (values) => {
       const data = {
         name: values.categoryName,
         restaurantId: restaurant.usersRestaurant.id,
       };
-      dispatch(createCategory({ reqData: data, jwt: localStorage.getItem("jwt") }));
-      console.log("data", data);
+      dispatch(createCategory(
+        {
+          reqData: data,
+          jwt: localStorage.getItem("jwt"),
+        })).then(() => {
+        if (onSuccess) onSuccess();
+      });
     },
   });
 
   return (
     <div className={''}>
       <div className={'p-5'}>
-        <h1 className={'text-gray-400 text-center text-xl pb-10'}>Create Food Category</h1>
+        <h1 className={'text-gray-400 text-center text-xl pb-10'}>Create Food
+                                                                  Category</h1 >
         <form className={'space-y-5'} onSubmit={formik.handleSubmit}>
           <TextField
             fullWidth
@@ -48,12 +54,12 @@ const CreateFoodCategoryForm = () => {
             fullWidth={false}
             type={'submit'}
             text={'Create Category'}
-            style={{ padding: 1 }}
+            style={{padding: 1}}
             isLoading={restaurant.loading}
           />
-        </form>
-      </div>
-    </div>
+        </form >
+      </div >
+    </div >
   );
 };
 

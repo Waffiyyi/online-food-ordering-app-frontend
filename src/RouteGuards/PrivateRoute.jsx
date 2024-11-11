@@ -8,7 +8,7 @@ const PrivateRoute = ({ allowedRole }) => {
   const [isLoading, setIsLoading] = useState(true);
   const dispatch = useDispatch();
 
-  const user = auth.user;
+  const user = auth.user?.user;
   const jwt = auth.jwt || localStorage.getItem("jwt");
   const isAuthenticated = !!user;
   const userRole = user?.role;

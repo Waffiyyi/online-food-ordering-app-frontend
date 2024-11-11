@@ -16,7 +16,7 @@ const validationSchema = Yup.object({
   categoryId: Yup.string().required('Ingredient category is required'),
 });
 
-const CreateIngredientForm = () => {
+const CreateIngredientForm = ({ onSuccess }) => {
   const { restaurant, ingredients } = useSelector(store => store);
   const jwt = localStorage.getItem("jwt");
   const dispatch = useDispatch();
@@ -35,8 +35,9 @@ const CreateIngredientForm = () => {
       dispatch(createIngredient({
         data: data,
         jwt: jwt,
-      }));
-      console.log("data", data);
+      })).then(() => {
+        if (onSuccess) onSuccess();
+      });
     },
   });
 

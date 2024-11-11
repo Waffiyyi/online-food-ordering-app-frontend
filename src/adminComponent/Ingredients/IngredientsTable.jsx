@@ -102,11 +102,9 @@ const IngredientTable = () => {
         aria-describedby='modal-modal-description'
       >
         <Box sx={style}>
-          <CreateIngredientForm />
-
-        </Box >
-
-      </Modal >
+          <CreateIngredientForm onSuccess={handleClose} />
+        </Box>
+      </Modal>
     </div >
   );
 };

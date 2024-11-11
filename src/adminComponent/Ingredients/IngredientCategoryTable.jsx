@@ -42,7 +42,7 @@ const IngredientCategoryTable = () => {
   };
   useEffect(() => {
     dispatch(getIngredientCategory({id: restaurant.usersRestaurant.id, jwt: jwt}))
-  }, [])
+  }, [dispatch, jwt, restaurant.usersRestaurant.id])
   return (
     <Box >
       <Card>
@@ -87,7 +87,7 @@ const IngredientCategoryTable = () => {
         aria-describedby='modal-modal-description'
       >
         <Box sx={style}>
-          <CreateIngredientCategoryForm />
+          <CreateIngredientCategoryForm onSuccess={handleClose} />
 
         </Box >
 

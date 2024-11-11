@@ -65,7 +65,7 @@ const Cart = () => {
       order: {
         restaurantId: cart.cartItems[0].food?.restaurant.id,
         deliveryAddress: {
-          fullName: auth.user?.fullName,
+          fullName: auth.user?.user.fullName,
           streetAddress: value.streetAddress,
           city: value.city,
           stateProvince: value.stateProvince,
@@ -81,7 +81,7 @@ const Cart = () => {
     <>
       <main className={'lg:flex justify-between'}>
         <section className={'lg:w-[30%] space-y-6 lg:min-h-screen pt-10'}>
-          {cart.cartItems.map((item, i) => <CartItem key={i} item={item}/>)}
+          {cart.cartItems.map((item, i) => <CartItem key={`${item.id}-${i}`} item={item}/>)}
           <Divider />
           <div className={'billDetails px-5 text-sm'}>
             <p className={'font-semibold py-5'}>Bill Details</p >
@@ -113,7 +113,7 @@ const Cart = () => {
               Choose Delivery Address
             </h1 >
             <div className={'flex gap-5 flex-wrap justify-center'}>
-              {auth.user?.addresses.map((i) => <AddressCard
+              {auth.user?.user.addresses.map((i) => <AddressCard
                   key={i}
                   item={i}
                   showButton={true}

@@ -87,7 +87,7 @@ const FoodCategoryTable = () => {
               aria-describedby="modal-modal-description"
             >
                 <Box sx={style}>
-                 <CreateFoodCategoryForm/>
+                 <CreateFoodCategoryForm onSuccess={handleClose}/>
                 </Box>
             </Modal>
         </div>

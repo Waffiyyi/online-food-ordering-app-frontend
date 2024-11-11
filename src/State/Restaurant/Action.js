@@ -242,7 +242,7 @@ export const searchRestaurant = (keyword, jwt) => async (dispatch) => {
       },
     });
     dispatch({ type: SEARCH_RESTAURANT_SUCCESS, payload: res.data });
-
+    return res;
   } catch (error) {
     dispatch(handleError(SEARCH_RESTAURANT_FAILURE, error.response.data.errorMessage ||error.response?.data?.message || error.message));
   }

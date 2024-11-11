@@ -42,7 +42,7 @@ const validationSchema = Yup.object({
   vegetarian: Yup.boolean()
   .required('Please select if the item is vegetarian'),
   nonveg: Yup.boolean()
-  .required('Please select if the item is non-vegetarian')
+  .required('Please select if the item is non-vegetarian'),
 });
 
 const initialValues = {
@@ -71,8 +71,13 @@ const CreateMenuForm = () => {
       validationSchema,
       onSubmit: (values) => {
         values.restaurantId = restaurant.usersRestaurant.id;
-        dispatch(createMenuItem({menu: values, jwt}));
-        navigate("/admin/restaurant/menu");
+        dispatch(createMenuItem(
+          {
+            menu: values,
+            jwt,
+          })).then(() => {
+          navigate("/admin/restaurant/menu");
+        });
       },
     },
   );
@@ -98,12 +103,12 @@ const CreateMenuForm = () => {
 
   useEffect(() => {
     dispatch(getIngredientsOfRestaurant({jwt, restaurantId: restaurant.usersRestaurant.id}));
-  }, []);
+  }, [dispatch, jwt, restaurant.usersRestaurant.id]);
 
   return (
     <div className={'py-10 px-3 lg:flex items-center justify-center min-h-screen'}>
       <div className={'lg:max-w-4xl'}>
-        <h1 className={'font-bold text-2xl text-center py-2'}>Add New Menu</h1>
+        <h1 className={'font-bold text-2xl text-center py-2'}>Add New Menu</h1 >
         <form onSubmit={formik.handleSubmit} className={'space-y-4'}>
           <Grid container spacing={2}>
             <Grid className={'flex flex-wrap gap-5'} item xs={12}>
@@ -120,26 +125,28 @@ const CreateMenuForm = () => {
                 className={'w-24 h-24 cursor-pointer flex items-center justify-center p-3 border rounded-md border-gray-600'}
               >
                 <AddPhotoAlternateIcon />
-              </span>
-                {uploadImage && <div className={'absolute left-0 right-0 top-0 bottom-0 w-24 h-24 flex justify-center items-center'}>
+              </span >
+                {uploadImage && <div
+                  className={'absolute left-0 right-0 top-0 bottom-0 w-24 h-24 flex justify-center items-center'}
+                >
                   <CircularProgress />
-                </div>}
-              </label>
+                </div >}
+              </label >
               <div className={'flex flex-wrap gap-2'}>
                 {formik.values.images.map((image, index) =>
                   <div key={image} className={'relative'}>
-                    <img className={'w-24 h-24 object-cover'} src={image} alt={''} />
+                    <img className={'w-24 h-24 object-cover'} src={image} alt={''}/>
                     <IconButton
                       size={'small'}
                       sx={{position: "absolute", top: 0, right: 0, outline: "none"}}
                       onClick={() => handleRemoveImage(index)}
                     >
-                      <CloseIcon sx={{fontSize: "1rem", color: "red"}} />
-                    </IconButton>
-                  </div>,
+                      <CloseIcon sx={{fontSize: "1rem", color: "red"}}/>
+                    </IconButton >
+                  </div >,
                 )}
-              </div>
-            </Grid>
+              </div >
+            </Grid >
 
             <Grid item xs={12}>
               <TextField
@@ -153,7 +160,7 @@ const CreateMenuForm = () => {
                 error={formik.touched.name && Boolean(formik.errors.name)}
                 helperText={formik.touched.name && formik.errors.name}
               />
-            </Grid>
+            </Grid >
 
             <Grid item xs={12}>
               <TextField
@@ -167,7 +174,7 @@ const CreateMenuForm = () => {
                 error={formik.touched.description && Boolean(formik.errors.description)}
                 helperText={formik.touched.description && formik.errors.description}
               />
-            </Grid>
+            </Grid >
 
             <Grid item xs={12} lg={6}>
               <TextField
@@ -181,11 +188,11 @@ const CreateMenuForm = () => {
                 error={formik.touched.price && Boolean(formik.errors.price)}
                 helperText={formik.touched.price && formik.errors.price}
               />
-            </Grid>
+            </Grid >
 
             <Grid item xs={12} lg={6}>
               <FormControl fullWidth>
-                <InputLabel id='demo-simple-select-label'>Food Category</InputLabel>
+                <InputLabel id='demo-simple-select-label'>Food Category</InputLabel >
                 <Select
                   labelId='demo-simple-select-label'
                   id='category'
@@ -195,14 +202,16 @@ const CreateMenuForm = () => {
                   name={'category'}
                   error={formik.touched.category && Boolean(formik.errors.category)}
                 >
-                  {restaurant.categories?.map((item) => <MenuItem key={item.id} value={item}>{item.name}</MenuItem>)}
-                </Select>
-              </FormControl>
-            </Grid>
+                  {restaurant.categories?.map((item) => <MenuItem
+                    key={item.id} value={item}
+                  >{item.name}</MenuItem >)}
+                </Select >
+              </FormControl >
+            </Grid >
 
             <Grid item xs={12}>
               <FormControl fullWidth>
-                <InputLabel id='demo-multiple-chip-label'>Ingredients</InputLabel>
+                <InputLabel id='demo-multiple-chip-label'>Ingredients</InputLabel >
                 <Select
                   labelId='demo-multiple-chip-label'
                   id='demo-multiple-chip'
@@ -210,24 +219,24 @@ const CreateMenuForm = () => {
                   multiple
                   value={formik.values.ingredientItems}
                   onChange={formik.handleChange}
-                  input={<OutlinedInput id='select-multiple-chip' label='Ingredients' />}
+                  input={<OutlinedInput id='select-multiple-chip' label='Ingredients'/>}
                   renderValue={(selected) => (
                     <Box sx={{display: 'flex', flexWrap: 'wrap', gap: 0.5}}>
                       {selected.map((value) => (
-                        <Chip key={value.id} label={value.name} />
+                        <Chip key={value.id} label={value.name}/>
                       ))}
-                    </Box>
+                    </Box >
                   )}
                   error={formik.touched.ingredientItems && Boolean(formik.errors.ingredientItems)}
                 >
                   {ingredients.ingredients?.map((item) => (
                     <MenuItem key={item.id} value={item}>
                       {item.name}
-                    </MenuItem>
+                    </MenuItem >
                   ))}
-                </Select>
-              </FormControl>
-            </Grid>
+                </Select >
+              </FormControl >
+            </Grid >
 
 
             <Grid
